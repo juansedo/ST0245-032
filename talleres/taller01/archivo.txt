@@ -47,7 +47,66 @@ class Punto {
 
 
 
-
+public class Fecha () {
+	
+	private byte dia;
+	private byte mes;
+	private short año;
+	
+	public Fecha (byte dia, byte mes, short año){
+		this.dia = dia;
+		this.mes = mes;
+		this.año = año;
+	}
+	
+	
+	public byte dia () {
+		return dia;
+	}
+	
+	public byte mes () {
+		return mes;
+	}
+	
+	public short año () {
+		return año;
+	}
+	
+	public int comparar (Fecha date) {
+		int resul = 0;
+		
+		if (año < date.año()) {
+			resul = -1;
+			return resul;
+		} else if (año > date.año() ){
+			resul = 1;
+			return resul;
+		} else if (año == date.año() ){
+			if (mes < date.mes() ){
+				resul = -1;
+				return resul;
+			} else if (mes > date.mes() ){
+				resul = 1;
+				return resul;
+			} else if (mes == date.mes() ){
+				if (dia < date.dia() ){
+					resul = -1;
+					return resul;
+				} else if (dia > date.dia() ){
+					resul = 1;
+					return resul;
+				} else if (dia == date.dia) {
+					return resul;
+				}
+			}
+		}
+		return resul;
+	}
+	
+	public String toString () {
+		return dia + "-" + mes + "-" + año + "-";
+	}
+}
 
 
 
