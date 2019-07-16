@@ -3,8 +3,12 @@
  *
  * @author jsdiazo, LizOriana1409
  */
-public class Punto {
-	
+ 
+ /**
+  * Clase para crear un punto
+  */
+class Punto {
+	/*Coordenadas*/
 	private double x;
 	private double y;
 	
@@ -37,5 +41,43 @@ public class Punto {
 		double yComponent = p.getY() - y;
 		
 		return Math.sqrt( Math.pow(xComponent, 2) + Math.pow(yComponent, 2));
+	}
+}
+
+
+
+
+
+
+
+
+class Contador {
+	/*ID y cuenta total*/
+	private String id;
+	private int cuenta;
+	
+	public Contador (String id) {
+		this.id = id;
+		cuenta = 0;
+	}
+	
+	public String getID() {
+		return id;
+	}
+	
+	public int incrementos() {
+		return cuenta;
+	}
+	
+	public void incrementar() {
+		cuenta += 1;
+	}
+	
+	/**
+	 * Devuelve el contador en el formato "Contador: 27"
+	 */
+        @Override
+	public String toString() {
+		return id + ": " + cuenta;
 	}
 }
