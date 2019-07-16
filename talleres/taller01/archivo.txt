@@ -74,6 +74,12 @@ public class Fecha () {
 		return año;
 	}
 	
+	/**
+	 * Devuelve:
+	 * -1 si la primera es menor que la segunda
+	 * 0 si son iguales 
+	 * 1 si la primera es mayor que la segunda
+	 */ 
 	public int comparar (Fecha date) {
 		int resul = 0;
 		
@@ -83,21 +89,21 @@ public class Fecha () {
 		} else if (año > date.año() ){
 			resul = 1;
 			return resul;
-		} else if (año == date.año() ){
+		} else {
 			if (mes < date.mes() ){
 				resul = -1;
 				return resul;
 			} else if (mes > date.mes() ){
 				resul = 1;
 				return resul;
-			} else if (mes == date.mes() ){
+			} else {
 				if (dia < date.dia() ){
 					resul = -1;
 					return resul;
 				} else if (dia > date.dia() ){
 					resul = 1;
 					return resul;
-				} else if (dia == date.dia) {
+				} else {
 					return resul;
 				}
 			}
