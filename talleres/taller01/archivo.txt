@@ -5,6 +5,7 @@
  */
  
  /**
+  * PUNTO 1
   * Clase para crear un punto
   */
 class Punto {
@@ -44,9 +45,10 @@ class Punto {
 	}
 }
 
-
-
-
+/**
+ * PUNTO 2
+ * Clase para crear una fecha
+ */
 public class Fecha () {
 	
 	private byte dia;
@@ -108,8 +110,10 @@ public class Fecha () {
 	}
 }
 
-
-
+/**
+ * PUNTO 3
+ * Clase para crear un contador
+ */
 class Contador {
 	/*ID y cuenta total*/
 	private String id;
