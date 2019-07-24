@@ -10,7 +10,6 @@ public class Recursion {
 	* PUNTO 1
 	* Calcula el MCD de dos números a y b.
 	*/
-	
 	public static int MCD(int a, int b) {
 		if (a < b) {
 			/*Intercambio de valores. Para que el mayor sea a*/
@@ -80,4 +79,41 @@ public class Recursion {
             pos++;
 		}
     }
+	
+	/**
+	* PUNTO 4 (OPCIONAL)
+	* Devuelve la subsecuencia común más larga entre dos strings dados.
+	* a - Primer string
+	* b - Segundo string
+	*/
+	public static String lcsdyn(String a, String b) {
+		lcsdyn(a,b,"");
+	}
+	
+	public static String lcsdyn(String a, String b, String output) {
+        if (a.length() == 0 || b.length() == 0) {
+            return "";
+        }
+        
+        for (int i = 0; i < a.length(); i++) {
+            String snip_a = a.substring(i, i+1);
+            int pos_in_b = b.indexOf(snip_a);
+            
+            /*Si el carácter de a está en b*/
+            if (pos_in_b >= 0) {
+                /*Creamos una cadena de carácteres de cada carácter de a relativo a b*/
+                String str = snip_a + lcsdyn(a.substring(i+1), b.substring(pos_in_b + 1), "");
+                
+                /*Va modificando el valor de output hasta encontrar el string más grande*/
+                if (str.length() > output.length()) output = str;
+            } else {
+                
+                /*Cambia de carácter en a*/
+                return lcsdyn(a.substring(i+1), b, output);
+            }
+        }
+        /*Entrega el string más grande*/
+        return output;
+    }
+	
 }
