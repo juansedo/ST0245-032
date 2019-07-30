@@ -8,6 +8,11 @@ public class Taller3 {
             char c = a.charAt(i);
             if (output.indexOf(c) < 0) permute(a, output + c);
         }
-        if (output.length() == a.length()) System.out.println(output);
+        if (output.length() == a.length()) {
+            /**
+            * El valor de output en este momento es una permutación de abcd.
+            * Debe pasarse a la función desencriptarArchivo. 
+            */
+        }
     }
 }
