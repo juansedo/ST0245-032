@@ -6,11 +6,11 @@ import java.util.ArrayList;
  */
 public class Taller3 {
 	/**
-    *
-    * Ejercicio 1.
+	* Ejercicio 1.
+	* Dado un n que representa la cantidad de aros de la torre de Hanoi,
+    * el algoritmo dice paso a paso como solucionar el problema.
     */
-     public static void TorresPrueba() {
-          int n = 4; 			//Se puede cambiar a gusto.
+     public static void TorresHanoi(int n) {
           Torres(n, 1, 3, 2);
      }
 
@@ -21,24 +21,32 @@ public class Taller3 {
                Torres(n - 1, origen, auxiliar, destino);
                System.out.println("Mover de " + origen + " a " + destino);
                Torres(n - 1, auxiliar,destino, origen);
-               
           }
      }
     
     /**
-    *
-    * Ejercicio 2. 
+    * Ejercicio 2.
+	* El algoritmo, dado un string a, encuentra cada permutación posible
+	* con las letras de este. Manteniendo siempre el mismo tamaño de string.
     */
-    public static void permute(String a, String output) {
+	public static void permutar(String a) {
+          permutar(a, "");
+    }
+    
+	public static void permutar(String a, String output) {
         for (int i = 0; i < a.length(); i++) {
             char c = a.charAt(i);
-            if (output.indexOf(c) < 0) permute(a, output + c);
+            if (output.indexOf(c) < 0) permutar(a, output + c);
         }
         if (output.length() == a.length()) {
             /**
             * El valor de output en este momento es una permutación de abcd.
-            * Debe pasarse a la función desencriptarArchivo. 
+            * Pasa a la función desencriptarArchivo (aunque, en nuestro contexto, no existe). 
             */
+			String s = desencriptarArchivo(output);
+			if (!s.isEmpty()) {
+				System.out.println(s);
+			}
         }
     }
 }
@@ -49,12 +57,13 @@ public class Taller3 {
  * @author juansedo, LizOriana1409
  */
 class ProblemaReinas {
-
-    public static void main(String[] args) {
-        int n = 8;	//Valor a cambiar para tamaño de tablero y cantidad de reinas
-        Queens(n);
-    }
-    
+	
+	/**
+	* Ejercicio 1.
+	* Dado un n que representa la cantidad de reinas y cuadros,
+    * el algoritmo muestra todas las formas en las que pueden ubicarse las
+	* reinas tal que no se amenace ninguna con la otra.
+    */
     public static void Queens(int n) {
         Queens(new ArrayList<>(), new boolean [n][n], 0);
     }
