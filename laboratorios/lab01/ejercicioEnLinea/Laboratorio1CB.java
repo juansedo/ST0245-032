@@ -5,7 +5,8 @@
 */
 public class Laboratorio1CB {
 	
-	/**
+				//RECURSIÓN 1
+	/** 1
 	* Recursión 1: strCount
 	* Devuelve las veces que el string sub se encuentra
 	* en el string str.
@@ -16,7 +17,7 @@ public class Laboratorio1CB {
 			0;
 	}
 	
-	/**
+	/** 2
 	* Recursión 1: strCopies
 	* Devuelve true si el string sub se encuentra n veces
 	* en el string str.
@@ -28,7 +29,7 @@ public class Laboratorio1CB {
 			strCopies(str.substring(str.indexOf(sub)+ 1), sub, n-1): false;
 	}
 	
-	/**
+	/** 3
 	* Recursión 1: strDist
 	* Devuelve el tamaño del substring de str que empieza y termina
 	* con el string sub.
@@ -48,9 +49,10 @@ public class Laboratorio1CB {
 		return str.substring(str.length() - sub.length(), str.length()).equals(sub);
 	}
 	
-	/**
-     * parenBit 
-     * Recursion-1 CodingBat
+	/** 4
+     * Recursion 1: parenBit
+	 * Devuelve el substring que empieza y termina con paréntesis
+	 * de str.
      */
     public String parenBit(String str) {
         if (str.equals("")) {
@@ -66,9 +68,9 @@ public class Laboratorio1CB {
             return parenBit(str.substring(1)); }
     }
 
-    /**
-     * nestParen 
-     * Recursion-1 CodingBat
+    /** 5
+     * Recursion 1: nestParen
+	 * Devuelve true si hay un número par de paréntesis en str.
      */
     public boolean nestParen (String str){
         int x = str.length();
@@ -82,7 +84,9 @@ public class Laboratorio1CB {
         }
     }
 	
-	/**
+	
+				//RECURSIÓN 2
+	/** 1
 	* Recursión 2: groupSum6
 	* Devuelve true si se puede obtener target al sumar
 	* algunos números de nums. Con la condición de que,
@@ -98,7 +102,7 @@ public class Laboratorio1CB {
 			    || groupSum6(start + 1, nums, target);
 	}
 	
-	/**
+	/** 2
 	* Recursión 2: groupNoAdj
 	* Devuelve true si se puede obtener target al sumar
 	* algunos números de nums. Con la condición de que,
@@ -113,21 +117,25 @@ public class Laboratorio1CB {
 			|| groupNoAdj(start + 1, nums, target);
 	}
 	
-	/**
-     * groupSumClump 
-     * Recursion-2 CodingBat
+	/** 3
+     * Recursion 2: groupSumClump
+	 * Devuelve true si se puede obtener target al sumar
+	 * algunos números de nums. Con la condición de que si hay
+	 * dos números iguales consecutivos o se tienen en cuenta en la suma
+	 * o no se tiene en cuenta ninguno
      */
     public boolean groupSumClump(int start, int[] nums, int target) {
         altArray(nums);
-        if (start >= nums.length) {
-            return target == 0;}
-        if (groupSumClump(start+1, nums, target-nums[start])) {
-            return true; }
-        if (groupSumClump(start+1, nums, target)) {
-            return true;}
-        else {
-            return false;} 
+        if (start >= nums.length) return (target == 0);
+		
+        if (groupSumClump(start+1, nums, target-nums[start])) return true;
+        if (groupSumClump(start+1, nums, target)) return true;
+        return false;
     }
+	
+	/**
+	* *****************
+	*/
     private void altArray(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             if (i > 0 && nums[i] == nums[i-1]) {
@@ -140,35 +148,35 @@ public class Laboratorio1CB {
         } 
     }
 
-    /**
-     * splitOdd10 
-     * Recursion-2 CodingBat
+    /** 4
+     * Recursion 2: splitOdd10
+	 * Devuelve true si hay un subgrupo que sume un par en nums
+	 * y que el resto sume un número impar.
      */
     public boolean splitOdd10(int[] nums) {
         return helper(0, nums, 0, 0);
     }
-    //Se crea una clase de apoyo para realizar el metodo recursivo 
+    
+	//Se crea una clase de apoyo para realizar el metodo recursivo 
     private boolean helper(int start, int[] nums, int sum1, int sum2) {
-        if (start >= nums.length)
-            return sum1 % 10 == 0 && sum2 % 2 == 1 || sum1 % 2 == 1 && sum2 % 10 == 0;
+        if (start >= nums.length) return sum1 % 10 == 0 && sum2 % 2 == 1 || sum1 % 2 == 1 && sum2 % 10 == 0;
         return helper(start + 1, nums, sum1 + nums[start], sum2)|| helper(start + 1, nums, sum1, sum2 + nums[start]);
     }
 
-    /**
-     * splitArray 
-     * Recursion-2 CodingBat
+    /** 5
+     * Recursion 2: splitArray
+	 * Devuelve true si hay un subgrupo que sume igual al
+	 * otro subgrupo en nums.
      */
     public boolean splitArray(int[] nums) {
         return Help (nums, 0, 0);   
     }
     //Se crea una clase de apoyo para realizar el metodo recursivo 
     public boolean Help (int[] nums, int i, int balance) {
-        if(i == nums.length) {
-            return (balance == 0);
-        }
-        if(Help (nums, i + 1, balance + nums[i])) {
-            return true; 
-        }
+        if(i == nums.length) return (balance == 0);
+        
+		if(Help (nums, i + 1, balance + nums[i])) return true;
+		
         return Help (nums, i + 1, balance - nums[i]);
     }
 }
