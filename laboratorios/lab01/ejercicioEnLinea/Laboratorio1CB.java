@@ -3,7 +3,7 @@
 *
 * @author juansedo, LizOriana1409
 */
-public class Laboratorio1 {
+public class Laboratorio1CB {
 	
 	/**
 	* Recursión 1: strCount
@@ -49,6 +49,22 @@ public class Laboratorio1 {
 	}
 	
 	/**
+	* Recursión 2: groupSum6
+	* Devuelve true si se puede obtener target al sumar
+	* algunos números de nums. Con la condición de que,
+	* después de elegir un número, no se debe tener en cuenta
+	* el consecutivo a este.
+	*/
+	public boolean groupSum6(int start, int[] nums, int target) {
+  		if (start >= nums.length) return (target == 0);
+  
+  		if (nums[start] == 6) return groupSum6(start + 1, nums, target - 6);
+  
+		return groupSum6(start + 1, nums, target - nums[start])
+			    || groupSum6(start + 1, nums, target);
+	}
+	
+	/**
 	* Recursión 2: groupNoAdj
 	* Devuelve true si se puede obtener target al sumar
 	* algunos números de nums. Con la condición de que,
@@ -62,5 +78,4 @@ public class Laboratorio1 {
 			groupNoAdj(start + 2, nums, target - nums[start])
 			|| groupNoAdj(start + 1, nums, target);
 	}
-	
 }
