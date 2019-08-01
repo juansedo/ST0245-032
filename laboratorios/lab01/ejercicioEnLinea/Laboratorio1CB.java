@@ -11,9 +11,9 @@ public class Laboratorio1 {
 	* en el string str.
 	*/
 	public int strCount(String str, String sub) {
-	return (str.indexOf(sub) >= 0)?
-		1 + strCount(str.substring(str.indexOf(sub) + sub.length()), sub):
-		0;
+		return (str.indexOf(sub) >= 0)?
+			1 + strCount(str.substring(str.indexOf(sub) + sub.length()), sub):
+			0;
 	}
 	
 	/**
@@ -22,9 +22,9 @@ public class Laboratorio1 {
 	* en el string str.
 	*/
 	public boolean strCopies(String str, String sub, int n) {
-	return (n == 0)?
-		true:
-		(str.indexOf(sub) >= 0)?
+		return (n == 0)?
+			true:
+			(str.indexOf(sub) >= 0)?
 			strCopies(str.substring(str.indexOf(sub)+ 1), sub, n-1): false;
 	}
 	
@@ -34,13 +34,13 @@ public class Laboratorio1 {
 	* con el string sub.
 	*/
 	public int strDist(String str, String sub) {
-  
 		if (str.length() < sub.length()) return 0;
   
 		return (str.startsWith(sub))?
 			(endsWith(str, sub))? str.length(): strDist(str.substring(0, str.length() - 1), sub):
 			strDist(str.substring(1), sub);
 	}
+	
 	/**
 	* Devuelve true si str termina con sub.
 	*/
