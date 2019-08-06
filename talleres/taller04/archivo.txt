@@ -1,0 +1,38 @@
+public class Taller 4 {
+/**
+ *
+ * Ejercicio 1 Codigo
+ */
+public static int Sumar(int array[]){
+    int x = array.length;
+    if (x == 0){
+      return array[x];
+    } else {
+      return (array[x] + Sumar(array[x - 1]));
+    }
+  }
+  
+  /**
+ *
+ * Ejercicio 2 Codigo
+ */
+ public static boolean Max(int start, int[] nums, int target) {
+    if (start >= nums.length){ 
+	  return target == 0;
+	} else {
+    return Max(start + 1, nums, target - nums[start]) || Max(start + 1, nums, target);
+	}
+}
+  
+/**
+ *
+ * Ejercicio 3 Codigo
+ */
+ public static int fibonacci (int n){
+	  if (n <= 1){
+		  return n;
+	  } else {
+	  	return fibonacci(n-1) + fibonacci(n - 2);
+	  }
+  }
+}
