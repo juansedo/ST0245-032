@@ -5,10 +5,11 @@ public class Taller 4 {
  */
 public static int Sumar(int array[]){
     int x = array.length;
+    int array2 [] = new int[x-1]; 
     if (x == 0){
       return array[x];
     } else {
-      return (array[x] + Sumar(array[x - 1]));
+      return (array[x] + Sumar(array2));
     }
   }
   
