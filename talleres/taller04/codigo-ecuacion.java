@@ -1,6 +1,6 @@
 public class Taller 4 {
 /**
- *
+ * Complejidad: T(n) = C2 + n + T(n - 1)
  * Ejercicio 1 Codigo
  */
 public static int Sumar(int array[]){
@@ -28,6 +28,7 @@ public static int Sumar(int array[]){
 /**
  *
  * Ejercicio 3 Codigo
+ * Complejidad: T(n) = T(n-1) + T(n -2)
  */
  public static int fibonacci (int n){
 	  if (n <= 1){
