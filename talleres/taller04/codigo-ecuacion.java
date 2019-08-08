@@ -1,23 +1,6 @@
 public class Taller4 {
-/**
- * Complejidad: T(n) = C2 + n + T(n - 1)
- * Ejercicio 1 Codigo
- * ERROR: No está haciendo la suma
- */
-@Deprecated
-public static int Sumar(int array[]){
-    int x = array.length;
-    int array2 [] = new int[x-1]; 
-    if (x == 0){
-      return array[x];
-    } else {
-      return (array[x] + Sumar(array2));
-    }
-  }
-  
-	
 	/**
- 	* Complejidad: T(n) = T(n - 1) + C
+ 	* Complejidad: T(n) = C2 + n + T(n - 1)
  	* Ejercicio 1 Codigo
  	*/
 	public static int Sumar(int [] array) {
@@ -29,9 +12,6 @@ public static int Sumar(int array[]){
         
         else return array[index] + Sumar(array, index + 1);
     }
-	
-	
-	
 	
   /**
  *
