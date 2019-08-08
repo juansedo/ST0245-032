@@ -43,6 +43,9 @@ class Algoritmos {
 	* PUNTO 1.2
 	* Devuelve el número de formas en las que se pueden ubicar
 	* rectángulos de 2x1 en un espacio de 2xn.
+	* 
+	* Complejidad asintótica:
+	* T(n) = T(n-1) + T(n-2)
 	* @param n Ancho del espacio donde se guardan los rectángulos.
 	*/
 	public int formas (int n) {
