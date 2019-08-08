@@ -17,7 +17,7 @@ public static int Sumar(int array[]){
   
 	
 	/**
- 	* Complejidad: A calcular
+ 	* Complejidad: T(n) = T(n - 1) + C
  	* Ejercicio 1 Codigo
  	*/
 	public static int Sumar(int [] array) {
