@@ -1,3 +1,8 @@
+/**
+*
+*
+* @author juansedo, LizOriana1409
+*/
 class Taller5 {
           //Insertion Sort
   /** Ciclos
@@ -60,5 +65,25 @@ class Taller5 {
 
     return arr;
   }
-
+          /**
+     * Sum.
+     * Algoritmo para sumar los elementos de una matriz
+     */
+    public static int Sum(int [] arr) {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) sum = arr[i];
+        return sum;
+    }
+    
+    /**
+     * MultiplicationTable (opcional).
+     * Algoritmo para realizar las tablas de multiplicar.
+     */
+    public static void MultiplicationTable(int n) {
+        for (int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) { 
+                int sum = i*j;
+            }
+        }
+    }
 }
