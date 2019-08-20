@@ -71,20 +71,22 @@ class ArrList {
     }
 
     void delete(int pos) {
+    /*Verifica si pos esta en el arreglo text*/
         if (pos <= text.length){
-			char[] textnew = new char[text.length];
-			for (int i = 0; i < pos; i++){
-				textnew[i] = text[i]
-			} 
-			for (int i = pos; i < text.length; i++){
-				textnew[i] = text[i+1];
-				ded
-			}
-			text = textnew;
-			size--;
-		} else {
-			text = text;
+		char[] textnew = new char[text.length];
+		/*Recorre hasta pos*/
+		for (int i = 0; i < pos; i++){
+			textnew[i] = text[i]
+		} 
+		/*Recorre hasta text.length*/
+		for (int i = pos; i < text.length; i++){
+			textnew[i] = text[i+1];
 		}
+		text = textnew;
+		size--;
+	} else {
+		text = text;
+	}
     }
     
     @Override
