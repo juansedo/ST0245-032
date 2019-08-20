@@ -93,7 +93,11 @@ class ArrList {
             text[size++] = c;
         }
     }
-
+	
+	/**
+	* Elimina un carácter en la posición dada.
+	* @param pos posición dada.
+	*/
     void delete(int pos) {
     /*Verifica si pos esta en el arreglo text*/
         if (pos <= text.length){
