@@ -9,6 +9,7 @@ class ArrList {
 	
 	/**
      * Método constructor.
+     * Complejidad: O(1)
      */
     public ArrList() {
         size = 0;
@@ -17,6 +18,7 @@ class ArrList {
 	
 	/**
      * @return devuelve el tamaño de la lista.
+     * Complejidad: O(1)
      */
     int size() {
         return size;
@@ -27,12 +29,13 @@ class ArrList {
      *
      * @param pos posición en la que se agrega el carácter (siendo 0 el inicio)
      * @param c carácter agregado
+	 * Complejidad: O(n)
      */
     void add(int pos, char c) {
         char[] textnew;
 
         if (pos >= text.length) {
-            /*Si la posición supera el tamaño actual de la lista*/
+            /*Si la posición supera el tamaño actual de la lista,*/
             int len = text.length;
 
             do {
@@ -80,6 +83,7 @@ class ArrList {
     /**
      * Añade un carácter al final de la lista.
      * @param c carácter a añadir
+	 * Complejidad: O(n)
      */
     void add(char c) {
         if (size == text.length) {
@@ -97,6 +101,7 @@ class ArrList {
 	/**
 	* Elimina un carácter en la posición dada.
 	* @param pos posición dada.
+	* Complejidad: O(n)
 	*/
     void delete(int pos) {
     /*Verifica si pos esta en el arreglo text*/
@@ -119,6 +124,7 @@ class ArrList {
     
 	/**
      * @return devuelve la lista de carácteres como un string donde uno está seguido del otro.
+	 * Complejidad: O(n)
      */
     @Override
     public String toString() {
