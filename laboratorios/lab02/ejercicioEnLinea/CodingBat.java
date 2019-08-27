@@ -6,6 +6,35 @@
 class CodingBat {
     
             //Array-2
+    public int countEvens(int[] nums) { 
+        int cont = 0; 
+        for (int i = 0; i < nums.length; i++) 
+            if (nums[i] % 2 == 0) cont++; 
+        return cont; 
+    } 
+
+    public int bigDiff(int[] nums) { 
+        int max = nums[0]; 
+        int min = nums[0]; 
+        for (int i = 0; i < nums.length; i++) { 
+            if (nums[i] > max) max = nums[i];   
+            if (nums[i] <= min) min = nums[i]; 
+        } 
+        return max - min; 
+    } 
+ 
+    public int centeredAverage(int[] nums) { 
+        int max = nums[0]; 
+        int min = nums[0]; 
+        int sum = 0; 
+        for (int i = 0; i < nums.length; i++) { 
+            sum += nums[i]; 
+            if (nums[i] > max) max = nums[i]; 
+            if (nums[i] < min) min = nums[i]; 
+        } 
+    return (sum - (max + min)) / (nums.length - 2); 
+    }
+    
     /**
     * Suma los elementos de un arreglo, evitando los 13
     * y el número siguiente a este.
@@ -43,6 +72,32 @@ class CodingBat {
     }
     
             //Array-3
+    public int maxSpan(int[] nums) { 
+        if (nums.length > 0) { 
+            int n = 1; 
+            for (int i = 0; i < nums.length; i++) 
+                for (int j = nums.length - 1; j > i; j--) 
+                    if (nums[j] == nums[i]) { 
+                        int cont = (j - i) + 1; 
+                        if (cont > n) n = cont; 
+                        break; 
+                    } 
+            return n;
+        } else return 0; 
+    } 
+ 
+    public int[] fix34(int[] nums) { 
+        for (int i = 0; i < nums.length; i++) 
+            if (nums[i] == 3) { 
+                int x = nums[i + 1]; 
+                nums[i + 1] = 4; 
+                for (int j = i + 2; j < nums.length; j++) 
+                    if (nums[j] == 4) nums[j] = x; 
+            }
+        return nums;
+    }
+    
+    
     /**
     * Reordena un arreglo haciendo que a cada 4
     * le siga un 5.
