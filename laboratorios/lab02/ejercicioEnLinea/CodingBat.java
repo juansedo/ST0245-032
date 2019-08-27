@@ -50,4 +50,26 @@ class CodingBat {
         }
         return nums;
     }
+    
+    public boolean canBalance(int[] nums) {
+        int sum1 = 0;
+        int sum2 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum1 += nums[i];
+            sum2 = 0;
+            for (int j = nums.length-1; j > i; j--) {
+                sum2 += nums[j];
+            }
+            if (sum1 == sum2) return true;
+        }
+        return false;
+    }
+    
+    public boolean linearIn(int[] outer, int[] inner) {
+        int j = 0;
+        for(int i = 0; i < outer.length && j < inner.length; i++) {
+            if (outer[i] == inner[j]) j++;
+        }
+        return (j==inner.length);
+    }
 }
