@@ -6,13 +6,28 @@
 class CodingBat {
     
             //Array-2
+    /**
+    * Cuenta la cantidad de impares de un arreglo de enteros.
+    *
+    * Complejidad asintótica:
+    * T(n) = n + C_1
+    * Esto es O(n)
+    */
     public int countEvens(int[] nums) { 
         int cont = 0; 
         for (int i = 0; i < nums.length; i++) 
             if (nums[i] % 2 == 0) cont++; 
         return cont; 
-    } 
-
+    }
+    
+    /**
+    * Busca el valor máximo y mínimo del arreglo y
+    * devuelve max - min.
+    *
+    * Complejidad asintótica:
+    * T(n) = n + C_1
+    * Esto es O(n)
+    */
     public int bigDiff(int[] nums) { 
         int max = nums[0]; 
         int min = nums[0]; 
@@ -21,8 +36,16 @@ class CodingBat {
             if (nums[i] <= min) min = nums[i]; 
         } 
         return max - min; 
-    } 
- 
+    }
+    
+    /**
+    * Suma los elementos del arreglo dado y le resta un valor
+    * máximo y uno mínimo. Devuelve el promedio de lo que queda.
+    *
+    * Complejidad asintótica:
+    * T(n) = n + C_1
+    * Esto es O(n)
+    */
     public int centeredAverage(int[] nums) { 
         int max = nums[0]; 
         int min = nums[0]; 
