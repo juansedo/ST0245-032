@@ -106,8 +106,29 @@ public class LinkedList {
         }
     }
     
-    public void delete() {
-        
+    public void delete(int pos) {
+        if (pos == 0) deleteBeginning();
+        else if (pos < size) deleteInside(startNode, pos);
+        else deleteAfter(startNode);
+    }
+    private void deleteBeginning(){
+        Node n = startNode;
+        n = n.next;
+        size--;
+    }
+    private void deleteInside(Node n, int pos){
+        if (pos != 0) deleteInside(n.next, pos -1);
+        else {
+            n = n.next; 
+        }
+    }
+    
+    private void deleteAfter(Node n){
+        if (n.next != null) deleteAfter(n.next);
+        else {
+            n = null;
+            size--;
+        }
     }
     
     
