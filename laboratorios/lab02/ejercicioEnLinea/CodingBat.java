@@ -95,6 +95,15 @@ class CodingBat {
     }
     
             //Array-3
+    /**
+    * Llamemos "span" a los valores entre las apariciones 
+    * más a la izquierda y más a la derecha de un número.
+    * Este algoritmo busca el tamaño del span más grande.
+    *
+    * Complejidad asintótica:
+    * T(n) = n^2 + C_1
+    * Esto es O(n^2)
+    */
     public int maxSpan(int[] nums) { 
         if (nums.length > 0) { 
             int n = 1; 
@@ -107,8 +116,16 @@ class CodingBat {
                     } 
             return n;
         } else return 0; 
-    } 
- 
+    }
+    
+    /**
+    * Reordena un arreglo haciendo que a cada 3
+    * le siga un 4.
+    *
+    * Complejidad asintótica:
+    * T(n) = n^2 + C_1
+    * Esto es O(n^2)
+    */
     public int[] fix34(int[] nums) { 
         for (int i = 0; i < nums.length; i++) 
             if (nums[i] == 3) { 
@@ -119,7 +136,6 @@ class CodingBat {
             }
         return nums;
     }
-    
     
     /**
     * Reordena un arreglo haciendo que a cada 4
