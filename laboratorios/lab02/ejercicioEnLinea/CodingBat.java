@@ -101,7 +101,7 @@ class CodingBat {
     * Este algoritmo busca el tamaño del span más grande.
     *
     * Complejidad asintótica:
-    * T(n) = n^2 + C_1
+    * T(n) = ∑n(n - i) + C_1
     * Esto es O(n^2)
     */
     public int maxSpan(int[] nums) { 
