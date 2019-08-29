@@ -101,7 +101,7 @@ class CodingBat {
     * Este algoritmo busca el tamaño del span más grande.
     *
     * Complejidad asintótica:
-    * T(n) = ∑n(n - i) + C_1
+    * T(n) = ∑n(n - i) [i=0 to n] + C_1
     * Esto es O(n^2)
     */
     public int maxSpan(int[] nums) { 
@@ -123,7 +123,7 @@ class CodingBat {
     * le siga un 4.
     *
     * Complejidad asintótica:
-    * T(n) = n^2 + C_1
+    * T(n) = ∑n(n - 2 - i) [i=1 to n - 2] + C_1
     * Esto es O(n^2)
     */
     public int[] fix34(int[] nums) { 
@@ -172,7 +172,7 @@ class CodingBat {
     * una forma de partir el arreglo tal que ambos lados sumen igual.
     *
     * Complejidad asintótica:
-    * T(n) = n^2 + C_1
+    * T(n) = ∑n(n - i) [i=0 to n] + C_1
     * Esto es O(n^2)
     */
     public boolean canBalance(int[] nums) {
@@ -194,8 +194,8 @@ class CodingBat {
     * arreglo están en el primero.
     *
     * Complejidad asintótica:
-    * T(n) = n^2 + C_1
-    * Esto es O(n^2)
+    * T(n) = n + C_1
+    * Esto es O(n)
     */
     public boolean linearIn(int[] outer, int[] inner) {
         int j = 0;
