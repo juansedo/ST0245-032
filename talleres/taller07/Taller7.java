@@ -106,20 +106,30 @@ public class LinkedList {
         }
     }
     
+    /**
+    * Elimina el valor en la posición dada de la lista.
+    * @param pos posición a eliminar.
+    */
     public void delete(int pos) {
+        if (size == 0) return;
+        
         if (pos == 0) deleteBeginning();
         else if (pos < size) deleteInside(startNode, pos);
         else deleteAfter(startNode);
     }
+    
     private void deleteBeginning(){
-        Node n = startNode;
-        n = n.next;
+        /**Elimina el nodo inicial*/
+        startNode = startNode.next;
         size--;
     }
+    
     private void deleteInside(Node n, int pos){
         if (pos != 0) deleteInside(n.next, pos -1);
         else {
-            n = n.next; 
+            /*Cambia el nodo en pos por el siguiente*/
+            n = n.next;
+            size--;
         }
     }
     
@@ -131,6 +141,19 @@ public class LinkedList {
         }
     }
     
+    /**
+    * @return true si existe el valor buscado, false si no existe.
+    */
+    public boolean contains(int value){
+        contains(startNode, value);
+    }
+    
+    public boolean contains(Node n, int value){
+        if (n == null) return false;
+        
+        if (n.getValue() == value) return true;
+        else return contains(n.next);
+    }
     
     
     @Override
@@ -158,12 +181,15 @@ class Node {
     public Node next;
     
     /**
-    *
+    * Método constructor
     */
     public Node(int i) {
         value = i;
     }
     
+    /**
+    * @return devuelve el valor del nodo.
+    */
     public int getValue() {
         return value;
     }
