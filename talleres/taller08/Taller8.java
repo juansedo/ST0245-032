@@ -9,9 +9,10 @@ import java.util.Stack;
 public class Taller8_ED {
 
     /**
-    * 
-    *
-    *
+    * Solución del punto 1
+    * El método pide la cantidad de neveras en el almacén y la
+    * cantidad de solicitudes que hay, así como la información
+    * de cada uno.
     */
     public static void Punto1() {
         Stack stack = new Stack();
