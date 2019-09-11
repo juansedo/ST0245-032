@@ -10,9 +10,8 @@ public class Taller8_ED {
 
     /**
     * Solución del punto 1
-    * El método pide la cantidad de neveras en el almacén y la
-    * cantidad de solicitudes que hay, así como la información
-    * de cada uno.
+    * interpreta las entradas de una calculadora polaca inversa
+    * a través de un stack que hace las operaciones.
     */
     public static void Punto1() {
         Stack stack = new Stack();
@@ -48,6 +47,12 @@ public class Taller8_ED {
         System.out.println(stack.pop());
     }
     
+    /**
+    * Solución del punto 2
+    * El método pide la cantidad de neveras en el almacén y la
+    * cantidad de solicitudes que hay, así como la información
+    * de cada uno.
+    */
     public static void Punto2() {
         Scanner in = new Scanner(System.in);
         Stack almacen = new Stack();
