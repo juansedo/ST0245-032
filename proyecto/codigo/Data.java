@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
@@ -8,200 +9,271 @@ import java.util.Scanner;
  * @author juansedo, LizOriana1409
  */
 public class Data {
-     private double ph;
-     private double soil_temperature;
-     private double soil_moisture;
-     private double iluminance;
-     private double env_temperature;
-     private double env_humidity;
-     private boolean label;
-     
-     public Data(){
-          ph = 0;
-          soil_temperature = 0;
-          soil_moisture = 0;
-          iluminance = 0;
-          env_temperature = 0;
-          env_humidity = 0;
-          label = false;
-     }
-     
-     public Data(double ph, double stemp, double mois, double ilum, double etemp, double ehum, boolean label){
-          this.ph = ph;
-          soil_temperature = stemp;
-          soil_moisture = mois;
-          iluminance = ilum;
-          env_temperature = etemp;
-          env_humidity = ehum;
-          this.label = label;
-     }
-     
-     public void defineLabel (Dataset dataset){
-          
-     }
-     
-     public double getPh() {
-          return ph;
-     }
 
-     public void setPh(double ph) {
-          this.ph = ph;
-     }
+    private double ph;
+    private double sTemperature;
+    private double sMoisture;
+    private double illuminance;
+    private double eTemperature;
+    private double eHumidity;
+    private boolean label;
 
-     public double getSoil_temperature() {
-          return soil_temperature;
-     }
+    public Data() {
+        ph = 0;
+        sTemperature = 0;
+        sMoisture = 0;
+        illuminance = 0;
+        eTemperature = 0;
+        eHumidity = 0;
+        label = false;
+    }
+    
+    public Data(double ph, double sTemp, double sMois, double illum, double eTemp, double eHum, boolean label) {
+        this.ph = ph;
+        sTemperature = sTemp;
+        sMoisture = sMois;
+        illuminance = illum;
+        eTemperature = eTemp;
+        eHumidity = eHum;
+        this.label = label;
+    }
+    
+    public double getPh() {
+        return ph;
+    }
 
-     public void setSoil_temperature(double soil_temperature) {
-          this.soil_temperature = soil_temperature;
-     }
+    public void setPh(double ph) {
+        this.ph = ph;
+    }
 
-     public double getSoil_moisture() {
-          return soil_moisture;
-     }
+    public double getsTemperature() {
+        return sTemperature;
+    }
 
-     public void setSoil_moisture(double soil_moisture) {
-          this.soil_moisture = soil_moisture;
-     }
+    public void setsTemperature(double sTemperature) {
+        this.sTemperature = sTemperature;
+    }
 
-     public double getIluminance() {
-          return iluminance;
-     }
+    public double getsMoisture() {
+        return sMoisture;
+    }
 
-     public void setIluminance(double iluminance) {
-          this.iluminance = iluminance;
-     }
+    public void setsMoisture(double sMoisture) {
+        this.sMoisture = sMoisture;
+    }
 
-     public double getEnv_temperature() {
-          return env_temperature;
-     }
+    public double getIlluminance() {
+        return illuminance;
+    }
 
-     public void setEnv_temperature(double env_temperature) {
-          this.env_temperature = env_temperature;
-     }
+    public void setIlluminance(double illuminance) {
+        this.illuminance = illuminance;
+    }
 
-     public double getEnv_humidity() {
-          return env_humidity;
-     }
+    public double geteTemperature() {
+        return eTemperature;
+    }
 
-     public void setEnv_humidity(double env_humidity) {
-          this.env_humidity = env_humidity;
-     }
+    public void seteTemperature(double eTemperature) {
+        this.eTemperature = eTemperature;
+    }
 
-     public boolean getLabel() {
-          return label;
-     }
+    public double geteHumidity() {
+        return eHumidity;
+    }
+
+    public void seteHumidity(double eHumidity) {
+        this.eHumidity = eHumidity;
+    }
+
+    public boolean getLabel() {
+        return label;
+    }
+
+    public void setLabel(boolean label) {
+        this.label = label;
+    }
+    
+    public double getValue(DataType t) throws Exception {
+        switch (t) {
+            case PH:
+                return getPh();
+            case STEMP:
+                return getsTemperature();
+            case SMOIS:
+                return getsMoisture();
+            case ILLUM:
+                return getIlluminance();
+            case ETEMP:
+                return geteTemperature();
+            case EHUM:
+                return geteHumidity();
+            default:
+                throw new Exception("No existe el tipo de dato mencionado");
+        }
+    }
 }
 
+class Dataset {
 
-class Dataset{
-     
-     private LinkedList<Data> data = new LinkedList<>();
-     Node rootDT;
-     
-     public Dataset(File f, boolean example) throws FileNotFoundException{
-          Scanner in = new Scanner(f);
-          
-          in.nextLine();
-          while(in.hasNextLine()) {
-               String [] str = in.nextLine().split(",");
-               Data d = new Data(Integer.parseInt(str[0]), Integer.parseInt(str[1]),
-                                 Integer.parseInt(str[2]), Integer.parseInt(str[3]),
-                                 Integer.parseInt(str[4]), Integer.parseInt(str[5]), 
-                                 str[6].contains("yes"));
-               data.add(d);
-          }
-          
-          if (example) {
-               rootDT = new Node();
-               rootDT = createTree(rootDT, data);
-          } else {
-               
-          }
-          
-     }
-     
-     private void addData(String str){
-     
-     }
-     
-     public void addData (Data d){
-          
-     }
-     
-     private Node createTree (Node n, LinkedList<Data> dataset) {
-          //CASO BASE: Un unico dato en stack
-          //Se crea una hoja
-          
-          
-          int S_total = dataset.size();
-          int yes = 0; 
-          int no = 0;
-          
-          for(Data d: dataset) {
-               if(d.getLabel()) yes++;
-               else no++;
-          }
-          
-          double entropy_g = -(yes/S_total)*Math.log(yes/S_total)/Math.log(2)
-                             -(no/S_total)*Math.log(no/S_total)/Math.log(2);
-          
-          Data testGain = new Data();
-          //Pasar por los datos del stack
-          for(Data d: dataset) {
-              testGain.setPh(testGain.getPh() + d.getPh()); //Completar con la ecuacion del documento ac9... ecuacion 3 
-              testGain.setSoil_temperature(testGain.getSoil_temperature() + d.getSoil_temperature());
-              testGain.setSoil_moisture(testGain.getSoil_moisture() + d.getSoil_moisture());
-              testGain.setIluminance(testGain.getIluminance() + d.getIluminance());
-              testGain.setEnv_temperature(testGain.getEnv_temperature() + d.getEnv_temperature());
-              testGain.setEnv_humidity(testGain.getEnv_humidity() + d.getEnv_humidity());
-          }
-          testGain.setPh(-(yes/S_total)*testGain.getPh() - (no/S_total)*testGain.getPh());
-          testGain.setSoil_temperature((yes/S_total)*testGain.getSoil_temperature() - (no/S_total)*testGain.getSoil_temperature());
-          testGain.setSoil_moisture((yes/S_total)*testGain.getSoil_moisture() - (no/S_total)*testGain.getSoil_moisture());
-          testGain.setIluminance((yes/S_total)*testGain.getIluminance() - (no/S_total)*testGain.getIluminance());
-          testGain.setEnv_temperature((yes/S_total)*testGain.getEnv_temperature() - (no/S_total)*testGain.getEnv_temperature());
-          testGain.setEnv_humidity((yes/S_total)*testGain.getEnv_humidity() - (no/S_total)*testGain.getEnv_humidity());
-          
-          
-          
-          
-          
-          //Obtener ganancia de informacion
-          
-          //CASO BASE: Ganancia no muy alta (gain < 0.8)
-          //Media de yes or no
-          
-          
-          
-          
-          Node m = new Node(5);
-          
-          return m;
-     }
+    private LinkedList<Data> data;
+    Node rootDT;
+
+    public Dataset(File f, boolean example) throws FileNotFoundException {
+        Scanner in = new Scanner(f);
+        
+        data = new LinkedList<>();
+        in.nextLine();
+        
+        while (in.hasNextLine()) {
+            addData(in.nextLine());
+        }
+        if (example) {
+            rootDT = new Node();
+            rootDT = createTree(rootDT, data);
+        }
+    }
+    
+    public final Data addData (String toSplit) {
+        String[] str = toSplit.split(",");
+        try {
+            Data d = new Data(Double.parseDouble(str[0]), Double.parseDouble(str[1]),
+                    Double.parseDouble(str[2]), Double.parseDouble(str[3]),
+                    Double.parseDouble(str[4]), Double.parseDouble(str[5]),
+                    str[6].contains("yes"));
+            data.add(d);
+            return d;
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("Error agregando -> " + str);
+            System.out.println("Problema con formato y comas.");
+            return null;
+        }
+    }
+
+    public final Data addData(Data d) {
+        data.add(d);
+        return d;
+    }
+
+    private Node createTree(Node n, LinkedList<Data> dataset) {
+        //CASO BASE: Un unico dato en stack
+        //Se crea una hoja
+        try {
+            double entropy_g = Gain.generalEntropy(dataset);
+            
+            double measure = 30;
+            double minPh = this.MinValue(DataType.PH);
+            
+            Data testGain = new Data();
+            
+            testGain.setPh(entropy_g - Gain.partialEntropy(dataset, minPh, DataType.PH));
+            //testGain.setsTemperature(entropy_g - Gain.partialEntropy(dataset, measure, DataType.STEMP));
+            //testGain.setsMoisture(entropy_g - Gain.partialEntropy(dataset, measure, DataType.SMOIS));
+            //testGain.setIlluminance(entropy_g - Gain.partialEntropy(dataset, measure, DataType.ILLUM));
+            //testGain.seteTemperature(entropy_g - Gain.partialEntropy(dataset, measure, DataType.ETEMP));
+            //testGain.seteHumidity(entropy_g - Gain.partialEntropy(dataset, measure, DataType.EHUM));
+            
+            System.out.println("PH: " + testGain.getPh());
+            System.out.println("STEMP: " + testGain.getsTemperature());
+            System.out.println("SMOIS: " + testGain.getsMoisture());
+            System.out.println("ILLUM: " + testGain.getIlluminance());
+            System.out.println("ETEMP: " + testGain.geteTemperature());
+            System.out.println("EHUM: " + testGain.geteHumidity());
+        }
+        catch(Exception e) {
+            System.out.println("Dataset sin datos suficientes.");
+        }
+        
+        
+        
+        
+        //Obtener ganancia de informacion
+        //CASO BASE: Ganancia no muy alta (gain < 0.8)
+        //Media de yes or no
+        Node m = new Node(5);
+
+        return m;
+    }
+    
+    public double MinValue(DataType t) throws Exception {
+        double min = Double.MAX_VALUE;
+        for (Data d : this.data) {
+            double test = d.getValue(t);
+            min = (test < min)? test: min;
+        }
+        return min;
+    }
 }
-
 
 class Node {
 
-     public double value;
-     public boolean answer;
-     public Node yes;
-     public Node no;
-     
-     public Node (){
-          value = 0;
-     }
-     
-     public Node (double value){
-          this.value = value;
-     }
-     
-     public Node (boolean answer){
-          this.answer = answer;
-     }
-     
-     public boolean compare (double n){
-          return n >= value;
-     }
+    public double value;
+    public boolean answer;
+    public Node yes;
+    public Node no;
+
+    public Node() {
+        value = 0;
+    }
+
+    public Node(double value) {
+        this.value = value;
+    }
+
+    public Node(boolean answer) {
+        this.answer = answer;
+    }
+
+    public boolean compare(double n) {
+        return n >= value;
+    }
+}
+
+class Gain {
+    
+    static double generalEntropy(LinkedList<Data> dataset) throws Exception {
+        int S_total = dataset.size();
+        
+        if(S_total == 0) throw new Exception("Conjunto vacío");
+        
+        double yes = 0;
+        double no = 0;
+        
+        for (Data d : dataset) {
+            if (d.getLabel()) yes++;
+            else no++;
+        }
+        
+        if (yes == 0 || no == 0) return 0;
+        
+        double a = -(yes /S_total) * Math.log(yes / S_total) / Math.log(2);
+        double b = -(no / S_total) * Math.log(no / S_total) / Math.log(2);
+        
+        return a + b;
+    }
+    
+    static double partialEntropy(LinkedList<Data> dataset, double measure, DataType t) throws Exception {
+        LinkedList<Data> s1 = new LinkedList<>(), s2 = new LinkedList<>();
+        for (Data d : dataset) {
+            double test = d.getValue(t);
+            if (test < measure) s1.add(d);
+            else s2.add(d);
+        }
+        try {
+            double entropy_s1 = Gain.generalEntropy(s1);
+            double entropy_s2 = Gain.generalEntropy(s2);
+            return (s1.size()*entropy_s1 + s2.size()*entropy_s2) / dataset.size();
+        } 
+        catch (Exception e) {
+            //Cambiar measure
+            return 0;
+        }
+    }
+}
+
+enum DataType {
+    PH, STEMP,
+    SMOIS, ILLUM,
+    ETEMP, EHUM
 }
