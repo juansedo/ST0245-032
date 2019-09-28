@@ -6,7 +6,7 @@ import java.util.Stack;
 
 /**
  *
- * @author Lorodriguc
+ * @author juansedo, LizOriana1409
  */
 public class Data {
      private double ph;
