@@ -196,7 +196,7 @@ class Dataset {
             n.yes = (m != null)? m: new Node(true);
             
             m = createTree(s2);
-            n.no = (m != null)? m: new Node(true);
+            n.no = (m != null)? m: new Node(false);
             
             return n;
             
