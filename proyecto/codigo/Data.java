@@ -1,15 +1,16 @@
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
- *
+ * Clase que representa los datos sobre una planta de café
+ * como ph, temperatura del suelo, iluminación, entre otros.
  * @author juansedo, LizOriana1409
  */
 public final class Data {
 
+    //Información de la planta
     private final double ph;
     private final double sTemperature;
     private final double sMoisture;
@@ -18,6 +19,16 @@ public final class Data {
     private final double eHumidity;
     private boolean label;
 
+    /**
+     * Constructor de la clase dato
+     * @param ph Nivel de ph
+     * @param sTemp Temperatura en el suelo
+     * @param sMois Nivel de humedad del suelo
+     * @param illum Iluminación
+     * @param eTemp Temperatura del ambiente
+     * @param eHum Nivel de humedad del ambiente
+     * @param label <tt>yes</tt> si el dato tiene roya, <>no</tt> en caso contrario
+     */
     public Data(double ph, double sTemp, double sMois, double illum, double eTemp, double eHum, boolean label) {
         this.ph = ph;
         sTemperature = sTemp;
@@ -28,47 +39,89 @@ public final class Data {
         this.label = label;
     }
     
+    /**
+     * @return El ph del dato.
+     */
     public double getPh() {
         return ph;
     }
 
+    /**
+     * @return La temperatura del suelo.
+     */
     public double getsTemperature() {
         return sTemperature;
     }
 
+    /**
+     * @return La humedad del suelo.
+     */
     public double getsMoisture() {
         return sMoisture;
     }
 
+    /**
+     * @return La iluminación.
+     */
     public double getIlluminance() {
         return illuminance;
     }
 
+    /**
+     * @return La temperatura ambiente.
+     */
     public double geteTemperature() {
         return eTemperature;
     }
 
+    /**
+     * @return La humedad ambiente.
+     */
     public double geteHumidity() {
         return eHumidity;
     }
 
+    /**
+     * @return La etiqueta de si tiene o no tiene roya.
+     */
     public boolean getLabel() {
         return label;
     }
     
+    /**
+     * Permite definir la etiqueta de un dato
+     * para saber si tiene roya o no a través
+     * de un árbol de decisión.
+     * @param ds Dataset con árbol de decisión.
+     * @throws Exception Método {@link #getValue}.
+     */
     public void setLabel(Dataset ds) throws Exception {
-        if(ds.getRoot() != null) setLabel(ds, ds.getRoot());
+        if(ds.getRoot() != null) setLabel(ds.getRoot());
         else System.out.println("Dataset no considerado de ejemplo");
     }
     
-    public void setLabel(Dataset ds, Node n) throws Exception {
+    /**
+     * Método recursivo auxiliar para {@link setLabel}
+     * @param n Nodo del árbol actual.
+     * @throws Exception Método {@link #getValue}
+     */
+    private void setLabel(Node n) throws Exception {
+        //Si hay un nodo nulo, se llegó a la hoja
         if(n.yes == null) this.label = n.answer;
         else {
+            //Se define el lado por el que se continua
             Node op = (n.compare(this.getValue(n.reason)))? n.yes: n.no;
-            setLabel(ds, op);
+            setLabel(op);
         }
     }
     
+    /**
+     * Devuelve el valor de un valor del dato específico.
+     * Mirar {@link DataType} para más información.
+     * @param t Tipo de dato.
+     * @return El valor del dato pedido.
+     * @throws Exception El dato pedido no existe.
+     */
     public double getValue(DataType t) throws Exception {
         switch (t) {
             case PH:
@@ -89,28 +142,48 @@ public final class Data {
     }
 }
 
+/**
+ * Clase que representa un conjunto de datos de la clase {@link Data}.
+ * Contiene operaciones para añadir datos y crear su propio árbol de
+ * decisión en el caso en que se considere a este conjunto como uno
+ * de entrenamiento.
+ * @author juansedo, LizOriana1409
+ */
 final class Dataset {
-
-    private LinkedList<Data> data;
-    private Node rootDT;
+    private LinkedList<Data> data;  //Lista con los datos
+    private Node rootDT;    //Nodo raíz del árbol de entrenamiento
     
-    public Dataset(File f, boolean example) throws FileNotFoundException {
+    /**
+     * Constructor para la clase Dataset.
+     * @param f Archivo .csv con los datos de las plantas de café.
+     * @param isTrainingData Define si el Dataset es un conjunto de datos
+     * de entrenamiento.
+     * @throws FileNotFoundException Cuando no se encuentra el archivo.
+     */
+    public Dataset(File f, boolean isTrainingData) throws FileNotFoundException {
         Scanner in = new Scanner(f);
         data = new LinkedList<>();
         
         //Ignora la primera linea, donde está la descripción de cada columna
         in.nextLine();
-        
         while (in.hasNextLine()) {
             addData(in.nextLine());
         }
         
         //Si es Dataset de entrenamiento, se crea el árbol
-        if (example) {
-            rootDT = createTree(data);
-        }
+        if (isTrainingData) rootDT = createTree(data);
     }
     
+    /**
+     * Agrega un dato al conjunto de datos. Esto lo hace
+     * por medio de un String con el siguiente formato:
+     * <br>
+     * ph,stemp,smois,illum,etemp,ehum,label
+     * <br>
+     * Si no se tiene el formato, no se agrega y la consola marca un error.
+     * @param toSplit String con formato de .csv
+     * @return El dato que fue agregado.
+     */
     public Data addData (String toSplit) {
         String[] str = toSplit.split(",");
         try {
@@ -128,8 +201,14 @@ final class Dataset {
         }
     }
     
+    /**
+     * Método que crea un árbol sobre un nodo de la clase {@link Node} a partír
+     * de una LinkedList de datos entregada.
+     * Este método hace recursión para definir las demás ramas del árbol.
+     * @param dataset Arreglo de datos. 
+     * @return Nodo raíz del árbol.
+     */
     private Node createTree(LinkedList<Data> dataset) {
-        
         //Un único elemento define el nodo
         if(dataset.size() == 1) {
             return new Node(dataset.getFirst().getLabel());
@@ -183,32 +262,76 @@ final class Dataset {
         }
     }
     
+    /**
+     * @return Nodo raíz del árbol 
+     */
     public Node getRoot() {
         return rootDT;
     }
 }
 
+/**
+ * Clase que representa un nodo de un árbol de decisión.
+ * @author juansedo, LizOriana1409
+ */
 class Node {
+    /**
+     * Tipo de dato que se evalúa en el nodo
+     */
     public DataType reason;
+    /**
+     * Valor con el que se evalúa
+     */
     public double value;
+    /**
+     * Etiqueta a asginar en caso de ser una hoja
+     */
     public boolean answer;
+    /**
+     * Nodos hijos
+     */
     public Node yes, no;
-
+    
+    /**
+     * Constructor de la clase Node.
+     * @param value Valor a guardar.
+     * @param t Tipo de dato que se evalúa.
+     */
     public Node(double value, DataType t) {
         this.value = value;
         this.reason = t;
     }
 
+    /**
+     * Constructor de la clase Node (se usa si el nodo es una hoja).
+     * @param answer Etiqueta a asignar.
+     */
     public Node(boolean answer) {
         this.answer = answer;
     }
-
+    
+    /**
+     * @param n Valor a evaluar.
+     * @return true si el valor dado es mayor que el valor del nodo y false en
+     * caso contrario.
+     */
     public boolean compare(double n) {
         return n > value;
     }
 }
 
+/**
+ * Clase con métodos para hacer cálculos necesarios para la ganancia
+ * @author juansedo, LizOriana1409
+ */
 class Gain {
+    /**
+     * Genera el valor de entropía de una lista de datos de la clase
+     * {@link Data}.
+     * @param dataset Conjunto de datos para obtener su entropía
+     * @return Entropía del conjunto de datos.
+     * @throws Exception Cuando no hay datos en el conjunto que se entregó.
+     */
     static double generalEntropy(LinkedList<Data> dataset) throws Exception {
         int S_total = dataset.size();
         
@@ -229,6 +352,17 @@ class Gain {
         return a + b;
     }
     
+    /**
+     * Genera el valor de entropía parcial de un dato específico.
+     * Hace parte de la fórmula de la ganancia de información y es el valor
+     * que se le restará a la entropía general. Entre más pequeño este valor,
+     * mejor es la calidad de la variable.
+     * @param dataset Conjunto de datos para dividir y obtener su entropía parcial.
+     * @param t Tipo de dato que se analizará.
+     * @return Un arreglo de double que incluye el valor mínimo de entropía y el valor
+     * con el que se separaron los datos para lograrlo.
+     * @throws Exception Puede ser el error de {@link Data#getValue} o el de {@link #generalEntropy}
+     */
     static double [] partialEntropy(LinkedList<Data> dataset, DataType t) throws Exception {
         LinkedList<Data> s1 = new LinkedList<>(), s2 = new LinkedList<>();
         
@@ -266,6 +400,18 @@ class Gain {
     }
 }
 
+/**
+ * Enumerador que define la información que tiene todo dato.
+ * <ul>
+ *  <li>{@link #PH}: Nivel de PH</li>
+ *  <li>{@link #STEMP}: Temperatura del suelo</li>
+ *  <li>{@link #SMOIS}: Humedad del suelo</li>
+ *  <li>{@link #ILLUM}: Iluminación</li>
+ *  <li>{@link #ETEMP}: Temperatura ambiente</li>
+ *  <li>{@link #EHUM}: Humedad ambiente</li>
+ * </ul>
+ * @author juansedo, LizOriana1409
+ */
 enum DataType {
     PH, STEMP,
     SMOIS, ILLUM,
