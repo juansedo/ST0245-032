@@ -130,7 +130,7 @@ class Dataset {
         }
         if (example) {
             rootDT = new Node();
-            rootDT = createTree(rootDT, data);
+            rootDT = createTree(data);
         }
     }
     
@@ -156,46 +156,79 @@ class Dataset {
         return d;
     }
 
-    private Node createTree(Node n, LinkedList<Data> dataset) {
-        //CASO BASE: Un unico dato en stack
-        //Se crea una hoja
+    private Node createTree(LinkedList<Data> dataset) {
+        
+        if(dataset.size() == 1) {
+            return new Node(data.getFirst().getLabel());
+        }
+        
         try {
+            if(dataset.isEmpty()) throw new Exception("Dataset vacío");
             double entropy_g = Gain.generalEntropy(dataset);
+            if (entropy_g == 0) return new Node(data.getFirst().getLabel());
             
-            double measure = 30;
-            double minPh = this.MinValue(DataType.PH);
+            double min_ent = Double.MAX_VALUE;
+            double node_value = Double.MAX_VALUE;
+            DataType sel_type = DataType.PH;
             
-            Data testGain = new Data();
+            for(DataType t : DataType.values()) {
+                double [] test = Gain.partialEntropy(dataset, t);
+                if (test[0] < min_ent) {
+                    min_ent = test[0];
+                    node_value = test[1];
+                    sel_type = t;
+                }
+            }
             
-            testGain.setPh(entropy_g - Gain.partialEntropy(dataset, minPh, DataType.PH));
-            //testGain.setsTemperature(entropy_g - Gain.partialEntropy(dataset, measure, DataType.STEMP));
-            //testGain.setsMoisture(entropy_g - Gain.partialEntropy(dataset, measure, DataType.SMOIS));
-            //testGain.setIlluminance(entropy_g - Gain.partialEntropy(dataset, measure, DataType.ILLUM));
-            //testGain.seteTemperature(entropy_g - Gain.partialEntropy(dataset, measure, DataType.ETEMP));
-            //testGain.seteHumidity(entropy_g - Gain.partialEntropy(dataset, measure, DataType.EHUM));
+            System.out.println(min_ent);
             
+            //Nodo creado
+            Node n = new Node(node_value, sel_type);
+            
+            //Crear las ramas
+            LinkedList<Data> s1 = new LinkedList<>(), s2 = new LinkedList<>();
+            for (Data d : dataset) {
+                if (n.compare(d.getValue(sel_type))) s1.add(d);
+                else s2.add(d);
+            }
+            
+            Node m = createTree(s1);
+            n.yes = (m != null)? m: new Node(true);
+            
+            m = createTree(s2);
+            n.no = (m != null)? m: new Node(true);
+            
+            return n;
+            
+            /*
+            testGain.setPh(entropy_g - Gain.partialEntropy(dataset, DataType.PH));
+            testGain.setsTemperature(entropy_g - Gain.partialEntropy(dataset, DataType.STEMP));
+            testGain.setsMoisture(entropy_g - Gain.partialEntropy(dataset, DataType.SMOIS));
+            testGain.setIlluminance(entropy_g - Gain.partialEntropy(dataset, DataType.ILLUM));
+            testGain.seteTemperature(entropy_g - Gain.partialEntropy(dataset, DataType.ETEMP));
+            testGain.seteHumidity(entropy_g - Gain.partialEntropy(dataset, DataType.EHUM));
+            */
+            
+            
+            /*
             System.out.println("PH: " + testGain.getPh());
             System.out.println("STEMP: " + testGain.getsTemperature());
             System.out.println("SMOIS: " + testGain.getsMoisture());
             System.out.println("ILLUM: " + testGain.getIlluminance());
             System.out.println("ETEMP: " + testGain.geteTemperature());
             System.out.println("EHUM: " + testGain.geteHumidity());
+            */
+            
+            
+            
         }
         catch(Exception e) {
-            System.out.println("Dataset sin datos suficientes.");
+            System.out.println(e.getMessage());
+            return null;
         }
-        
-        
-        
-        
-        //Obtener ganancia de informacion
-        //CASO BASE: Ganancia no muy alta (gain < 0.8)
-        //Media de yes or no
-        Node m = new Node(5);
-
-        return m;
     }
     
+    @Deprecated
     public double MinValue(DataType t) throws Exception {
         double min = Double.MAX_VALUE;
         for (Data d : this.data) {
@@ -207,7 +240,8 @@ class Dataset {
 }
 
 class Node {
-
+    
+    public DataType reason;
     public double value;
     public boolean answer;
     public Node yes;
@@ -217,8 +251,9 @@ class Node {
         value = 0;
     }
 
-    public Node(double value) {
+    public Node(double value, DataType t) {
         this.value = value;
+        this.reason = t;
     }
 
     public Node(boolean answer) {
@@ -226,7 +261,7 @@ class Node {
     }
 
     public boolean compare(double n) {
-        return n >= value;
+        return n > value;
     }
 }
 
@@ -237,8 +272,7 @@ class Gain {
         
         if(S_total == 0) throw new Exception("Conjunto vacío");
         
-        double yes = 0;
-        double no = 0;
+        double yes = 0, no = 0;
         
         for (Data d : dataset) {
             if (d.getLabel()) yes++;
@@ -246,29 +280,45 @@ class Gain {
         }
         
         if (yes == 0 || no == 0) return 0;
-        
         double a = -(yes /S_total) * Math.log(yes / S_total) / Math.log(2);
         double b = -(no / S_total) * Math.log(no / S_total) / Math.log(2);
-        
         return a + b;
     }
     
-    static double partialEntropy(LinkedList<Data> dataset, double measure, DataType t) throws Exception {
+    static double [] partialEntropy(LinkedList<Data> dataset, DataType t) throws Exception {
         LinkedList<Data> s1 = new LinkedList<>(), s2 = new LinkedList<>();
-        for (Data d : dataset) {
-            double test = d.getValue(t);
-            if (test < measure) s1.add(d);
-            else s2.add(d);
-        }
-        try {
+        
+        double min = Double.MAX_VALUE;
+        double measure_d = 0;
+        
+        for (Data data: dataset) {
+            double measure = data.getValue(t);
+            
+            //Separación de los grupos
+            for (Data d : dataset) {
+                double test = d.getValue(t);
+                if (test <= measure) s1.add(d);
+                else s2.add(d);
+            }
+            
+            //Entropía de clasificaciones
             double entropy_s1 = Gain.generalEntropy(s1);
-            double entropy_s2 = Gain.generalEntropy(s2);
-            return (s1.size()*entropy_s1 + s2.size()*entropy_s2) / dataset.size();
-        } 
-        catch (Exception e) {
-            //Cambiar measure
-            return 0;
+            double entropy_s2 = (!s2.isEmpty())? Gain.generalEntropy(s2) : 0;
+            
+            //Suma de las entropías
+            double test = (s1.size()*entropy_s1 + s2.size()*entropy_s2) / dataset.size();
+            
+            if (test < min)  {
+                min = test;
+                measure_d = measure;
+            }
+            
+            //Resetear las listas
+            s1.clear();
+            s2.clear();
         }
+        
+        return new double[]{min, measure_d};
     }
 }
 
