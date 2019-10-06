@@ -1,5 +1,3 @@
-package laboratorio4;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -7,7 +5,7 @@ import java.util.LinkedList;
  *
  * @author juansedo, LizOriana1409
  */
-public class Laboratorio4 {
+public class Punto1_1 {
     public static void main(String[] args) {
         System.out.println("Inicio:");
         
