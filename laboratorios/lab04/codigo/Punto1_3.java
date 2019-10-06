@@ -34,10 +34,10 @@ public class Punto1_3 {
         grandmotherDad.setFather("Arcelio Antonio Gallego");
         grandmotherDad.setMother("Maria Luisa Henao");
         
-        grandfatherMom.setFather("");
+        grandfatherMom.setFather("Eugenio Osorio");
         grandfatherMom.setMother("Rosamelia Palacios");
-        grandmotherMom.setFather("");
-        grandmotherMom.setMother("");
+        grandmotherMom.setFather("Sigifredo García");
+        grandmotherMom.setMother("Margarita Correa");
     }
 }
 
