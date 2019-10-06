@@ -233,7 +233,7 @@ enum Operation {
                     return f.weight > bound;
                 case LESS_THAN:
                     return f.weight < bound;
-                case NONE:
+            case NONE: default:
                     return true;
             }
     }
