@@ -1,0 +1,103 @@
+PDFs
++-- [JuanSe 10,69 MB]    (Hal Leonard Keyboard Style) Hector Martignon - Salsa Piano - The Complete Guide with CD!_ Hal Leonard Keyboard Style Series-Hal Leonard Corporation (2007).pdf
++-- [JuanSe 9,50 MB]    83book-esp.pdf
++-- [JuanSe 4,19 MB]    Apuntes de álgebra lineal.pdf
++-- [JuanSe 1,48 MB]    backgammon_ebook.pdf
++-- [JuanSe 4,26 MB]    Clean_Code.pdf
++-- [JuanSe 2,54 MB]    Colin Howson - Logic with Trees_ An Introduction to Symbolic Logic (1997, Routledge).pdf
++-- [JuanSe 4,91 MB]    Copi, I. - Lógica simbólica.pdf
++-- [JuanSe 61,09 MB]    Copi, I., Cohen, C. -Introducción a la lógica.pdf
++-- [JuanSe Carpeta]    Documentos
+¦   +-- [JuanSe 55,45 KB]    Cédula Ruth Nelly Osorio.pdf
+¦   +-- [JuanSe 860,08 KB]    Tarjeta de Identidad Juan Sebastian Díaz.pdf
++-- [JuanSe 1,71 MB]    El nombre de la rosa - Umberto Eco.pdf
++-- [JuanSe 4,22 MB]    Guitarra - 100 Boleros.pdf
++-- [JuanSe 1,87 MB]    Guitarra - 100 Románticas.pdf
++-- [JuanSe 3,45 MB]    Hurley - A concise introduction to logic (7 ed.).pdf
++-- [JuanSe 3,58 MB]    Jean-Paul Sartre - El ser y la nada.pdf
++-- [JuanSe 95,29 MB]    Larson R., Edwards, B. - Cálculo 1 (9 ed.).pdf
++-- [JuanSe Carpeta]    Leyes y normas
+¦   +-- [JuanSe 51,51 KB]    Decreto 1278 de 2002.pdf
+¦   +-- [JuanSe 121,58 KB]    Decreto 1860 de 1994.pdf
+¦   +-- [JuanSe 126,20 KB]    Ley 115 de 1994.pdf
+¦   +-- [JuanSe 520,68 KB]    Proyecto de ley 057 de 2018 - Sistema general de participaciones.pdf
++-- [JuanSe Carpeta]    Libros
+¦   +-- [JuanSe 794,56 KB]    Arthur Conan Doyle - Las aventuras de Sherlock Holmes.pdf
+¦   +-- [JuanSe 930,50 KB]    Cien años de soledad - Gabriel García Márquez.pdf
+¦   +-- [JuanSe 1,20 MB]    El día que se perdió la cordura - Javier Castillo.pdf
+¦   +-- [JuanSe 4,22 MB]    El Emilio - Jean Jacques Rousseau.pdf
+¦   +-- [JuanSe 995,02 KB]    El extranjero - Albert Camus.pdf
+¦   +-- [JuanSe 10,46 MB]    El Hobbit - J. R. R. Tolkien.pdf
+¦   +-- [JuanSe 1,17 MB]    El Principito - Antoine de Saint-Exupéry.pdf
+¦   +-- [JuanSe 2,08 MB]    El señor Presidente - Miguel Ángel de Asturias.pdf
+¦   +-- [JuanSe 129,82 MB]    English Grammar in Use (4th Edition) - R. Murphy.pdf
+¦   +-- [JuanSe 1,42 MB]    Franz Kafka - El Proceso.pdf
+¦   +-- [JuanSe 196,23 KB]    Franz Kafka - la metamorfosis.pdf
+¦   +-- [JuanSe 3,46 MB]    Karl Marx - El Capital.pdf
+¦   +-- [JuanSe 868,45 KB]    Karl Marx- Manifiesto_comunista.pdf
+¦   +-- [JuanSe 841,98 KB]    La divina comedia - Dante Alighieri.pdf
+¦   +-- [JuanSe 1,27 MB]    La naranja mecanica - Anthony Burgess.pdf
+¦   +-- [JuanSe 2,52 MB]    Los Miserables - Victor Hugo.pdf
+¦   +-- [JuanSe 422,32 KB]    Política para Amador - Fernando Savater.pdf
+¦   +-- [JuanSe 57,07 MB]    Química - R. Chang.pdf
+¦   +-- [JuanSe 1,50 MB]    Thomas Harris - 03 - Hannibal.pdf
+¦   +-- [JuanSe 1,71 MB]    Umberto Eco-El nombre de la rosa.pdf
+¦   +-- [JuanSe 1,35 MB]    Viaje al centro de la Tierra - Julio Verne.pdf
+¦   +-- [JuanSe 446,50 KB]    William Golding  - El Senor de las Moscas.pdf
+¦   +-- [JuanSe 1,54 MB]    Yo antes de ti - Jojo Moyes.pdf
++-- [JuanSe Carpeta]    Matemáticas
+¦   +-- [JuanSe 227,71 KB]    Aplicaciones de la derivada.pdf
+¦   +-- [JuanSe 42,33 MB]    Combinatoria - N. Vilenkin.pdf
+¦   +-- [JuanSe 1,90 MB]    Combinatoria y Probabilidad - Miguel R. Wilhelmi.pdf
+¦   +-- [JuanSe 7,62 MB]    Combinatoria.pdf
+¦   +-- [JuanSe 4,91 MB]    Copi, Irving M. (2001) Lógica Simbólica. Editorial Continental.pdf
+¦   +-- [JuanSe 13,28 MB]    Criterios de divisibilidad - N. N. Vorobiov.pdf
+¦   +-- [JuanSe 8,28 MB]    Cómo entender y hacer demostraciones matemáticas - Daniel Solow.pdf
+¦   +-- [JuanSe 12,42 MB]    El boson de Higgs no te va a hacer la cama - Javier Santaolalla.pdf
+¦   +-- [JuanSe 2,53 MB]    Farrell, Joyce (2013) Introducción a la programación lógica y diseño. (Jorge Alberto Velásquez Arellano, trad.). 7th ed. Cengage Learning Editores S.A.pdf
+¦   +-- [JuanSe 34,92 MB]    Física Universitaria - Sears Zemansky.pdf
+¦   +-- [JuanSe 1,33 MB]    Glosario de términos estadísticos.pdf
+¦   +-- [JuanSe 3,45 MB]    Hurley - A concise introduction to logic (7th edition).pdf
+¦   +-- [JuanSe 66,15 MB]    Inteligencia matemática - Eduardo Sáenz de Cabezón.pdf
+¦   +-- [JuanSe 39,94 MB]    L. Leithold - El cálculo (Seventh edition).pdf
+¦   +-- [JuanSe 1,08 MB]    Lógica.pdf
+¦   +-- [JuanSe 24,81 MB]    Matemática discreta - G. P. Gavrílov.pdf
+¦   +-- [JuanSe 18,33 MB]    Matemática discreta - Norman L. Biggs.pdf
+¦   +-- [JuanSe 1,17 MB]    Matemática discreta - Pascual J. Martinez.pdf
+¦   +-- [JuanSe 41,29 KB]    Permutaciones y combinaciones.pdf
+¦   +-- [JuanSe 81,22 KB]    Por qué cálculo I es tan difícil.pdf
+¦   +-- [JuanSe 1,76 MB]    Posamentier & Salkind (1988) Challenging Problems in Algebra. Dover publications Inc.pdf
+¦   +-- [JuanSe 1,64 MB]    Posamentier & Salkind (1988) Challenging Problems in Geometry. Dover publications Inc.pdf
+¦   +-- [JuanSe 32,04 MB]    Ribnikov, K. (1988) Análisis combinatorio. Mir.pdf
+¦   +-- [JuanSe 4,06 MB]    Teoria de Geometría.pdf
+¦   +-- [JuanSe 248,59 KB]    Teoría combinatoria.pdf
+¦   +-- [JuanSe 554,84 KB]    Teoría de números para olimpiadas matemáticas - José Heber Nieto.pdf
+¦   +-- [JuanSe 13,24 MB]    Triola, M.F. (2004). Estadística. Pearson Addisson Wesley.pdf
++-- [JuanSe 29,16 KB]    Mii_Channel_Theme.mscz.pdf
++-- [JuanSe Carpeta]    Música
+¦   +-- [JuanSe 221,82 KB]    Bach - Little Fugue in G minor.pdf
+¦   +-- [JuanSe 752,28 KB]    Julien Marchal - INSIGHT II All piano scores.pdf
+¦   +-- [JuanSe 1,11 MB]    Piano - Close to you.pdf
+¦   +-- [JuanSe 118,14 KB]    Piano - Rondo Alla Turca.pdf
++-- [JuanSe Carpeta]    Otros
+¦   +-- [JuanSe 154,80 KB]    Ejemplos ejercicios disoluciones.pdf
+¦   +-- [JuanSe 2,00 MB]    Guía para realizar un proyecto.pdf
+¦   +-- [JuanSe 44,09 KB]    Historia de Colombia cuadro comparativo.xlsx
+¦   +-- [JuanSe 16,40 MB]    Roberto Grau - Conformación de peones.pdf
+¦   +-- [JuanSe 16,41 MB]    Roberto Grau - Estrategia superior.pdf
+¦   +-- [JuanSe 14,19 MB]    Roberto Grau - Rudimentos.pdf
+¦   +-- [JuanSe 22,05 MB]    Roberto Grau - Tácticas.pdf
+¦   +-- [JuanSe 9,50 MB]    Texas Instruments TI-83 Manual.pdf
+¦   +-- [JuanSe 7,01 MB]    Ubisoft Cocktail Recipes.zip
+¦   +-- [JuanSe 7,72 MB]    Ubisoft Dessert Recipes.zip
++-- [JuanSe Carpeta]    Programación
+¦   +-- [JuanSe 361,53 KB]    Curso de C.pdf
+¦   +-- [JuanSe 523,42 KB]    Diseño HTML y CSS.pdf
+¦   +-- [JuanSe 345,32 KB]    Guía base de datos Excel 2003.pdf
+¦   +-- [JuanSe 1,16 MB]    Manual básico HTML - Universidad de Murcia.pdf
+¦   +-- [JuanSe 320,75 KB]    Programación en MATLAB.pdf
++-- [JuanSe 606,63 KB]    Reglamento académico pregrado 2019.pdf
++-- [JuanSe 396,38 KB]    Rousseau, J. - El contrato social.pdf
++-- [JuanSe 34,94 MB]    Sears Zemansky - Física Universitaria. 1-Pearson Addison - Wesley (2009).pdf
++-- [JuanSe 6,90 MB]    SWEBOKv3.pdf
++-- [JuanSe 763,73 KB]    ukulele-chord-chart_1.pdf
