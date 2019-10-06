@@ -1,5 +1,3 @@
-package laboratorio4;
-
 /**
  *
  * @author juansedo, LizOriana1409
@@ -84,5 +82,14 @@ class BinaryTree {
     
     public Node getRoot() {
         return root;
+    }
+    
+    /**
+    * Método para encontrar la abuela materna
+    */
+    public String getMaternalGrandmother() {
+        String name = this.root.getMother().getMother().name;
+        if (name != null) return name;
+        return "No definida";
     }
 }
