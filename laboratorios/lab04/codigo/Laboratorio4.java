@@ -1,4 +1,4 @@
-Apackage laboratorio4;
+package laboratorio4;
 
 import java.util.HashMap;
 import java.util.LinkedList;
