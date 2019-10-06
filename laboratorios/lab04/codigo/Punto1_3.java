@@ -4,6 +4,10 @@
  */
 public class Punto1_3 {
     public static void main(String[] args) {
+        /*
+        * Esta prueba corresponde a lo pedido en el ejercicio 1_2
+        */
+        
         BinaryTree me = new BinaryTree("Juan Sebastián Díaz Osorio");
         //Padres
         me.getRoot().setFather("Javier Alonso Díaz Gallego");
