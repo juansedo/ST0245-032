@@ -72,7 +72,7 @@ public class DigraphAL {
 /**
  * Implementacion de un grafo dirigido usando matrices de adyacencia
  *
- * @author Mauricio Toro, Mateo Agudelo, <su nombre>
+ * @author juansedo, LizOriana1409
  */
 class DigraphAM {
     private int[][] matriz;
