@@ -1,3 +1,5 @@
+
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
@@ -27,7 +29,7 @@ public final class Data {
      * @param illum Iluminación
      * @param eTemp Temperatura del ambiente
      * @param eHum Nivel de humedad del ambiente
-     * @param label <tt>yes</tt> si el dato tiene roya, <>no</tt> en caso contrario
+     * @param label yes si el dato tiene roya, no en caso contrario
      */
     public Data(double ph, double sTemp, double sMois, double illum, double eTemp, double eHum, boolean label) {
         this.ph = ph;
@@ -92,12 +94,11 @@ public final class Data {
      * Permite definir la etiqueta de un dato
      * para saber si tiene roya o no a través
      * de un árbol de decisión.
-     * @param ds Dataset con árbol de decisión.
+     * @param ds TrainingDataset con árbol de decisión.
      * @throws Exception Método {@link #getValue}.
      */
-    public void setLabel(Dataset ds) throws Exception {
-        if(ds.getRoot() != null) setLabel(ds.getRoot());
-        else System.out.println("Dataset no considerado de ejemplo");
+    public void setLabel(TrainingDataset ds) throws Exception {
+        setLabel(ds.getRoot());
     }
     
     /**
@@ -110,7 +111,7 @@ public final class Data {
         if(n.yes == null) this.label = n.answer;
         else {
             //Se define el lado por el que se continua
-            Node op = (n.compare(this.getValue(n.reason)))? n.yes: n.no;
+            Node op = (n.compare(this.getValue(n.type)))? n.yes: n.no;
             setLabel(op);
         }
     }
@@ -140,6 +141,7 @@ public final class Data {
                 throw new Exception("No existe el tipo de dato mencionado");
         }
     }
+    
 }
 
 /**
@@ -149,56 +151,27 @@ public final class Data {
  * de entrenamiento.
  * @author juansedo, LizOriana1409
  */
-final class Dataset {
-    private LinkedList<Data> data;  //Lista con los datos
+final class TrainingDataset {
+    private Dataset data;  //Lista con los datos
     private Node rootDT;    //Nodo raíz del árbol de entrenamiento
     
     /**
-     * Constructor para la clase Dataset.
+     * Constructor para la clase TrainingDataset.
      * @param f Archivo .csv con los datos de las plantas de café.
-     * @param isTrainingData Define si el Dataset es un conjunto de datos
      * de entrenamiento.
      * @throws FileNotFoundException Cuando no se encuentra el archivo.
      */
-    public Dataset(File f, boolean isTrainingData) throws FileNotFoundException {
+    public TrainingDataset(File f) throws FileNotFoundException {
         Scanner in = new Scanner(f);
-        data = new LinkedList<>();
+        data = new Dataset();
         
         //Ignora la primera linea, donde está la descripción de cada columna
         in.nextLine();
         while (in.hasNextLine()) {
-            addData(in.nextLine());
+            data.addData(in.nextLine());
         }
         
-        //Si es Dataset de entrenamiento, se crea el árbol
-        if (isTrainingData) rootDT = createTree(data);
-    }
-    
-    /**
-     * Agrega un dato al conjunto de datos. Esto lo hace
-     * por medio de un String con el siguiente formato:
-     * <br>
-     * ph,stemp,smois,illum,etemp,ehum,label
-     * <br>
-     * Si no se tiene el formato, no se agrega y la consola marca un error.
-     * @param toSplit String con formato de .csv
-     * @return El dato que fue agregado.
-     */
-    public Data addData (String toSplit) {
-        String[] str = toSplit.split(",");
-        try {
-            Data d = new Data(Double.parseDouble(str[0]), Double.parseDouble(str[1]),
-                    Double.parseDouble(str[2]), Double.parseDouble(str[3]),
-                    Double.parseDouble(str[4]), Double.parseDouble(str[5]),
-                    str[6].contains("yes"));
-            data.add(d);
-            return d;
-        }
-        catch (IndexOutOfBoundsException e) {
-            System.out.println("Error agregando -> " + toSplit);
-            System.out.println("Problema con formato y comas.");
-            return null;
-        }
+        rootDT = createTree(data, 0);
     }
     
     /**
@@ -208,19 +181,19 @@ final class Dataset {
      * @param dataset Arreglo de datos. 
      * @return Nodo raíz del árbol.
      */
-    private Node createTree(LinkedList<Data> dataset) {
+    private Node createTree(LinkedList<Data> dataset, int level) {
         //Un único elemento define el nodo
         if(dataset.size() == 1) {
-            return new Node(dataset.getFirst().getLabel());
+            return new Node(dataset.getFirst().getLabel()); //O(1)
         }
         
         try {
             //Sin elementos, arrojamos nulo
             if(dataset.isEmpty()) throw new Exception("Dataset vacío");
-            double entropy_g = Gain.generalEntropy(dataset);
+            double entropy_g = Gain.generalEntropy(dataset); //O(n)
             
             //Entropía = 0 representa homogeneidad en los datos
-            if (entropy_g == 0) return new Node(dataset.getFirst().getLabel());
+            if (entropy_g == 0) return new Node(dataset.getFirst().getLabel()); //O(1)
             
             //Se buscan el mínimo de entropía en los datos y
             //el valor del nodo y el tipo de dato que lo logran
@@ -228,7 +201,7 @@ final class Dataset {
             double node_value = Double.MAX_VALUE;
             DataType sel_type = DataType.PH;
             
-            for(DataType t : DataType.values()) {
+            for(DataType t : DataType.values()) { //O(n^3)
                 //test[0] -> Mínimo de entropia, test[1] -> Valor con el que se logra
                 double [] test = Gain.partialEntropy(dataset, t);
                 if (test[0] < min_ent) {
@@ -240,6 +213,7 @@ final class Dataset {
             
             //Nodo creado
             Node n = new Node(node_value, sel_type);
+            n.level = level;
             
             //Se crean los subconjuntos
             LinkedList<Data> s1 = new LinkedList<>(), s2 = new LinkedList<>();
@@ -249,10 +223,10 @@ final class Dataset {
             }
             
             //Se crean los nodos hijos
-            Node m = createTree(s1);
+            Node m = createTree(s1, level + 1);
             n.yes = (m != null)? m: new Node(true);
             
-            m = createTree(s2);
+            m = createTree(s2, level + 1);
             n.no = (m != null)? m: new Node(false);
             
             return n;
@@ -268,6 +242,42 @@ final class Dataset {
     public Node getRoot() {
         return rootDT;
     }
+    
+    public int getHeight() {
+        return getHeight(rootDT);
+    }
+    
+    private int getHeight(Node n) {
+        if (n == null) return 0;
+        
+        int lnodes = 1 + getHeight(n.no);
+        int rnodes = 1 + getHeight(n.yes);
+        
+        return Math.max(lnodes, rnodes);
+    }
+    
+    public int getWidth() {
+        int max = Integer.MIN_VALUE;
+        int [] levels = new int[getHeight()];
+        
+        getWidth(levels, rootDT);
+        for (int n: levels) {
+            if (n > max) max = n;
+        }
+        return max;
+    }
+    
+    private void getWidth(int [] levels, Node n) {
+        if (n != null) {
+            levels[n.level]++;
+            getWidth(levels, n.no);
+            getWidth(levels, n.yes);
+        }
+    }
+    
+    public int getSize() {
+        return data.size();
+    }
 }
 
 /**
@@ -278,13 +288,15 @@ class Node {
     /**
      * Tipo de dato que se evalúa en el nodo
      */
-    public DataType reason;
+    public DataType type;
     /**
      * Valor con el que se evalúa
      */
     public double value;
+    
+    public int level;
     /**
-     * Etiqueta a asginar en caso de ser una hoja
+     * Etiqueta a asignar en caso de ser una hoja
      */
     public boolean answer;
     /**
@@ -299,7 +311,7 @@ class Node {
      */
     public Node(double value, DataType t) {
         this.value = value;
-        this.reason = t;
+        this.type = t;
     }
 
     /**
@@ -413,7 +425,46 @@ class Gain {
  * @author juansedo, LizOriana1409
  */
 enum DataType {
-    PH, STEMP,
-    SMOIS, ILLUM,
-    ETEMP, EHUM
+    PH(Color.RED), STEMP(new Color (80, 170, 240)),
+    SMOIS(Color.YELLOW), ILLUM(new Color(220, 190, 130)),
+    ETEMP(new Color (30, 220, 40)), EHUM(new Color(160, 110, 230));
+    
+    Color color;
+    
+    private DataType(Color color) {
+        this.color = color;
+    }
+}
+
+class Dataset extends LinkedList<Data> {
+    //Completar
+    
+    
+    
+    /**
+     * Agrega un dato al conjunto de datos. Esto lo hace
+     * por medio de un String con el siguiente formato:
+     * <br>
+     * ph,stemp,smois,illum,etemp,ehum,label
+     * <br>
+     * Si no se tiene el formato, no se agrega y la consola marca un error.
+     * @param toSplit String con formato de .csv
+     * @return El dato que fue agregado.
+     */
+    public Data addData (String toSplit) {
+        String[] str = toSplit.split(",");
+        try {
+            Data d = new Data(Double.parseDouble(str[0]), Double.parseDouble(str[1]),
+                    Double.parseDouble(str[2]), Double.parseDouble(str[3]),
+                    Double.parseDouble(str[4]), Double.parseDouble(str[5]),
+                    str[6].contains("yes"));
+            this.add(d);
+            return d;
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("Error agregando -> " + toSplit);
+            System.out.println("Problema con formato y comas.");
+            return null;
+        }
+    }
 }
