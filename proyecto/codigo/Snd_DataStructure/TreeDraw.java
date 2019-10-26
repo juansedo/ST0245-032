@@ -1,10 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.io.File;
-import java.io.FileNotFoundException;
 import javax.swing.*;
 
 /**
+ * Esta clase representa un dibujo de un árbol de decisión de nuestro problema.
+ * Esta es una implementación básica la cuál da una idea de como se ve el árbol
  * @author juansedo, LizOriana1409
  */
 public class TreeDraw extends JPanel {
@@ -23,6 +23,11 @@ public class TreeDraw extends JPanel {
     private JFrame frame;
     private Node root;
     
+    /**
+     * Constructor para la clase TreeDraw.
+     * @param root Nodo raíz del árbol a dibujar.
+     * @param width Ancho máximo que debe tener el árbol.
+     */
     public TreeDraw(Node root, int width) {
         this.root = root;
         frame = new JFrame();
@@ -35,10 +40,21 @@ public class TreeDraw extends JPanel {
         interval = H_SIZE/width;
     }
     
+    /**
+     * Muestra el árbol en un frame.
+     */
     public void show() {
         frame.setVisible(true);
     }
     
+    /**
+     * Método recursivo para imprimir los nodos del árbol.
+     * @param g Gráficos del JPanel actual.
+     * @param n Nodo que se va a dibujar.
+     * @param start Valor de referencia en eje x. También conocido como offset.
+     * @param x Posición en x.
+     * @param y Posición en y.
+     */
     private void print(Graphics g, Node n, int start, int x, int y) {
         if (n != null) {
             frame.setVisible(true);
@@ -69,11 +85,26 @@ public class TreeDraw extends JPanel {
         setBackground(Color.WHITE);
     }
     
+    /**
+     * Dibuja un círculo que representa al nodo.
+     * @param g Gráficos del JPanel actual.
+     * @param color Color con el que se dibuja.
+     * @param x Posición en x.
+     * @param y Posición en y.
+     */
     public void put(Graphics g, Color color, int x, int y) {
         g.setColor(color);
         g.fillOval(x, y, N_SIZE, N_SIZE);
     }
     
+    /**
+     * Dibuja una linea.
+     * @param g Gráficos del JPanel actual.
+     * @param x1 Posición x1.
+     * @param y1 Posición y1.
+     * @param x2 Posición x2.
+     * @param y2 Posición y2.
+     */
     public void connect(Graphics g, int x1, int y1, int x2, int y2) {
         g.setColor(Color.BLACK);
         g.drawLine(x1, y1, x2, y2);
